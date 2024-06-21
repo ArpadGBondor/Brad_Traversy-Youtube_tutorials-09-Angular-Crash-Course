@@ -4,5 +4,4 @@
 
 ## Used tools:
 
-- Angular 12
-  - This project runs on node14
+- Angular 13
