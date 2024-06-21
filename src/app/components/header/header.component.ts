@@ -26,9 +26,11 @@ export class HeaderComponent implements OnInit {
   //   this.subscription.unsubscribe();
   // }
 
-  // toggleAddTask() {
-  //   this.uiService.toggleAddTask();
-  // }
+  toggleAddTask() {
+    console.log('click');
+    this.showAddTask = !this.showAddTask;
+    // this.uiService.toggleAddTask();
+  }
 
   // hasRoute(route: string) {
   //   return this.router.url === route;
