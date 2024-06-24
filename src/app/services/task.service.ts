@@ -1,30 +1,50 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Task } from '../Task';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  }),
-};
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:5000/tasks';
+  constructor() {}
 
-  constructor(private http: HttpClient) {}
-
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiUrl);
+  async getTasks(): Promise<Observable<Task[]>> {
+    try {
+      const { data } = await axios(`/api/tasks`);
+      return of(data);
+    } catch (e) {
+      console.log(`Error: ${e.message}`);
+    }
   }
 
-  deleteTask(task: Task): Observable<Task> {
-    return this.http.delete<Task>(`${this.apiUrl}/${task.id}`);
+  async deleteTask(task: Task): Promise<Observable<void>> {
+    try {
+      const { data } = await axios.delete(`/api/tasks?id=${task.id}`);
+      console.log(data);
+      return of(null);
+    } catch (e) {
+      console.log(`Error: ${e.message}`);
+    }
   }
-  updateTask(task: Task) {
-    return this.http.put<Task>(`${this.apiUrl}/${task.id}`, task, httpOptions);
+
+  async updateTask(task: Task): Promise<Observable<Task>> {
+    try {
+      const { data } = await axios.put(`/api/tasks?id=${task.id}`, task);
+      console.log(data);
+      return of(data);
+    } catch (e) {
+      console.log(`Error: ${e.message}`);
+    }
+  }
+
+  async addTask(task: Task): Promise<Observable<Task>> {
+    try {
+      const { data } = await axios.post(`/api/tasks`, task);
+      console.log(data);
+      return of(data);
+    } catch (e) {
+      console.log(`Error: ${e.message}`);
+    }
   }
 }
