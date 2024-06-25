@@ -16,7 +16,7 @@
 
 ## Deployed
 
-- Soon - On Netlify
+- [On Netlify](https://gabriels-brad-traversy-angular-crash.netlify.app/)
 
 ## Mayor changes:
 
