@@ -1,10 +1,11 @@
 [dev]
 framework = "angular"
+command = "ng serve"
 targetPort = 4200
 
 [build]
- command = 'npm run build'
- publish = '/dist'
+ command = 'ng build --prod'
+ publish = '/dist/angular-crash'
  functions = './functions'
 
 [[redirects]]
